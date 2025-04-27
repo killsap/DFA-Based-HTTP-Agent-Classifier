@@ -3,7 +3,7 @@
 A tiny, deterministic-finite-automaton (DFA) that classifies HTTP request
 sequences as **AI agent** or **human** using only discrete, explainable tokens
 (headers, timing, typing speed, burst depth, etc.).  Built as a university
-project—small, transparent, and runnable entirely in the browser or Node.js.
+project.
 
 ---
 ## Table of Contents
