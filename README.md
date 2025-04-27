@@ -67,7 +67,7 @@ root/
 ## Prerequisites
 * **Node.js ≥ 14** (ES-modules & optional chaining supported)
 * **npm** (ships with Node)
-* *Optional* Playwright (for headless automation): `npm i -D playwright`
+* Playwright (for headless automation) and Amazon Nova Act Developer Preview: https://nova.amazon.com/act
 
 ---
 ## Quick Start
