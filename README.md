@@ -26,7 +26,7 @@ Video example can be seen here in my VM: https://youtu.be/2z7hHM0byMI
 | **4-state DFA** | `q0 → q1 → qA` flip after ≥ 2 bot tokens (provably minimal). |
 | **Browser demo** | `/public/index.html` shows “🚨 Agent / ✅ Human” live. |
 | **Playwright / Nova scripts** | Automate clicks and generate burst traffic for testing. |
-| **Synthetic corpus** | `npm run gen` fabricates labeled JSON traces. |
+| **DFA Testing** | `npm run gen` fabricates labeled JSON tests. |
 | **Metrics** | `npm run eval` (dataset) & `npm run metrics` (interactive logs). |
 | **No build step** | Runs directly from source; no bundler required for coursework. |
 
@@ -58,7 +58,7 @@ root/
   ├── test/                   # Jest unit tests
   │   └── dfa.test.js
   │
-  ├── logs/                   # interactive logs + synthetic corpus
+  ├── logs/                   # interactive logs + DFA test
   │   └── dataset/            # generated JSON traces live here
   │
   └── package.json
