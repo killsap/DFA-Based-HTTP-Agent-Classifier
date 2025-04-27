@@ -5,6 +5,8 @@ sequences as **AI agent** or **human** using only discrete, explainable tokens
 (headers, timing, typing speed, burst depth, etc.).  Built as a university
 project.
 
+Video example can be seen here in my VM: https://youtu.be/2z7hHM0byMI
+
 ---
 ## Table of Contents
 1. [Features](#features)
