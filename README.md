@@ -70,6 +70,8 @@ dfa-http-classifier/
 git clone https://github.com/killsap/DFA-Based-HTTP-Agent-Classifier.git
 cd DFA-Based-HTTP-Agent-Classifier
 npm install
+cd dfa_http_classifier_esmodules
+npm install
 
 # 2. run unit tests
 npm test
