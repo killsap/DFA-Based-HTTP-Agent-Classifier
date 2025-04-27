@@ -32,29 +32,35 @@ project.
 ---
 ## Folder Layout
 ```text
-dfa-http-classifier/
-│
-├── public/                 # static demo (index.html, dfa.js copy)
-│   ├── index.html          # UI + detectors + DFA import
-│   └── dfa.js              # minimal DFA (copied from src/)
-│
-├── src/
-│   ├── dfa.js              # state table + classify()
-│   └── tokenExtractor.js   # header / timing to tokens
-│
-├── scripts/
-│   ├── server.mjs          # Node dev server + /log endpoint
-│   ├── generateDataset.mjs # npm run gen
-│   ├── evaluate.mjs        # npm run eval
-│   └── metricsInteractions.mjs  # npm run metrics
-│
-├── test/                   # Jest unit tests
-│   └── dfa.test.js
-│
-├── logs/                   # interactive logs + synthetic corpus
-│   └── dataset/            # generated JSON traces live here
-│
-└── package.json
+root/
+  package.json
+  playwright.config.js
+  Agents/
+  | - AiAgentNovaAct.py       # AI Agent Nova Act for text input speed
+  | - aiAgentTestHeadless.py  # Headless agent test
+  dfa_http_classifier_esmodules/
+  │
+  ├── public/                 # static demo (index.html, dfa.js copy)
+  │   ├── index.html          # UI + detectors + DFA import
+  │   └── dfa.js              # minimal DFA (copied from src/)
+  │
+  ├── src/
+  │   ├── dfa.js              # state table + classify()
+  │   └── tokenExtractor.js   # header / timing to tokens
+  │
+  ├── scripts/
+  │   ├── server.mjs          # Node dev server + /log endpoint
+  │   ├── generateDataset.mjs # npm run gen
+  │   ├── evaluate.mjs        # npm run eval
+  │   └── metricsInteractions.mjs  # npm run metrics
+  │
+  ├── test/                   # Jest unit tests
+  │   └── dfa.test.js
+  │
+  ├── logs/                   # interactive logs + synthetic corpus
+  │   └── dataset/            # generated JSON traces live here
+  │
+  └── package.json
 ```
 
 ---
