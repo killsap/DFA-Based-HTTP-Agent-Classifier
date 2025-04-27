@@ -1,4 +1,4 @@
-# DFA-Based HTTP Agent Classifier
+# DFA-Based HTTP Agent Classifier for MTH5051 Final Project
 
 A tiny, deterministic-finite-automaton (DFA) that classifies HTTP request
 sequences as **AI agent** or **human** using only discrete, explainable tokens
