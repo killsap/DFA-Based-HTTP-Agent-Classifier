@@ -123,7 +123,7 @@ The generator alternates human / agent, yielding a 50 : 50 balance.
 2. **DFA** – 4 states, deterministic; any 2 bot tokens reach `qA`.
 3. **Verdict** – UI shows emoji + logs JSON; Playwright/Nova scripts read it.
 
-For formal definition, minimization proof, and complexity analysis, see the *report* or canvas document (Sections 2–4).
+For formal definition, minimization proof, and complexity analysis, see the *report* or canvas document.
 
 ---
 ## Limitations & Future Work
