@@ -85,7 +85,8 @@ npm test
 # 3. start the local demo server
 npm run serve
 # → http://localhost:8080  (click buttons, type, paste)
-
+# 3.1 python3 ./aiAgentTestHeadless.py --openai # Don't forget to set your API key
+# 3.2 python3 ./AiAgentNovaAct.py # Don't forget to set your API key
 # 4. synthetic dataset (100 traces)
 npm run gen -- logs/dataset 100   # 50 human + 50 agent
 npm run eval -- logs/dataset      # prints accuracy / precision / recall
