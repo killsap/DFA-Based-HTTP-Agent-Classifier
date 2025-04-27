@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DFA HTTP Agent Classifier Demo</title>
+  <style>
+    body   { font-family:sans-serif; padding:2rem; max-width:620px; margin:auto; }
+    button { margin:0.25rem; padding:0.5rem 1.1rem; font-size:1rem; }
+    #result{ font-size:1.4rem; margin-top:1rem; }
+  </style>
+</head>
+<body>
+  <h1>DFA HTTP Agent Classifier Demo</h1>
+
+  <button id="human">Simulate&nbsp;Human</button>
+  <button id="bot">Simulate&nbsp;Bot</button>
+  <button id="live">Classify&nbsp;My&nbsp;Browser</button><br><br>
+
+  <label for="novaInput">Type anything &nbsp;</label>
+  <input id="novaInput" type="text" style="width:60%">
+  <button id="sendText">Send</button>
+  <button id="reset">Reset 🔄</button>
+
+  <p id="result">—</p>
+
+  <!-- MAIN LOGIC MODULE ------------------------------------------------- -->
+  <script type="module">
+    import { classify } from './dfa.js';
+    window.classify = classify;        // expose for console testing
+
+    /* -------- helper: /log -------------------------------------------- */
+    async function log(action, extra) {
+      try {
+        await fetch('/log', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action, ...extra })
+        });
+      } catch { /* ignore */ }
+    }
+    function show(v){ document.getElementById('result').textContent = v ? '🚨 Agent':'✅ Human'; }
+
+    /* ------------ button handlers ------------------------------------- */
+    document.getElementById('human').onclick = () => {
+      const verdict = classify(['T2','T2']);
+      show(verdict);  log('simulateHuman',{verdict});
+    };
+    document.getElementById('bot').onclick = () => {
+      const verdict = classify(['H2','T1']);
+      show(verdict);  log('simulateBot',{verdict});
+    };
+    document.getElementById('live').onclick = () => {
+      const suspicious = /(bot|spider|crawler|headless)/i.test(navigator.userAgent);
+      const verdict = classify( suspicious ? ['H2','H1'] : ['T2'] );
+      show(verdict);  log('liveUA',{verdict});
+    };
+    document.getElementById('sendText').onclick = () => {
+      const txt = document.getElementById('novaInput').value;
+      if(txt){ log('novaTyping',{text:txt}); document.getElementById('novaInput').value=''; }
+    };
+    document.getElementById('reset').onclick = () => {
+      show(false); document.getElementById('novaInput').value='';
+      window.__burstDone=false; window.__typingDone=false;
+      log('resetClicked', {});
+    };
+
+    /* -------- Rapid-burst detector ------------------------------------ */
+    (()=>{ const TH=50; let last=0,hits=0,done=false;
+      const obs=new PerformanceObserver(l=>{
+        for(const e of l.getEntries()){
+          if(done) break;
+          if(e.initiatorType!=='fetch'&&e.initiatorType!=='xmlhttprequest') continue;
+          const d=e.startTime-last; last=e.startTime;
+          hits = d<TH?hits+1:1;
+          if(hits>=2){ done=true; const v=classify(['T1','D1']); show(v); log('autoBurst',{verdict:v}); obs.disconnect(); }
+        }
+      });
+      obs.observe({entryTypes:['resource']});
+    })();
+
+    /* -------- Typing-speed & paste detector --------------------------- */
+    (()=>{ const BOX='novaInput',WIN=20,FAST=40,PASTE=10;
+      const box=document.getElementById(BOX); if(!box) return;
+      const gaps=[]; let last=0,fired=false;
+      function emit(reason){ if(fired) return; fired=true;
+        const v=classify(['K1','H1']); show(v); log('typingDetect',{reason,verdict:v});
+      }
+      box.addEventListener('keydown', ()=>{
+        const now=performance.now();
+        if(last){ gaps.push(now-last); if(gaps.length>WIN) gaps.shift();
+          if(gaps.length===WIN && gaps.reduce((a,b)=>a+b)/WIN<FAST) emit('fastKeys');
+        } last=now;
+      });
+      box.addEventListener('input', e=>{
+        if((e.data?.length||0)>=PASTE) emit('bulkInput');
+      });
+    })();
+  </script>
+</body>
+</html>
+

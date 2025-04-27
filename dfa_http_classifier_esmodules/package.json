@@ -1,0 +1,23 @@
+{
+  "name": "dfa-http-classifier",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Minimal DFA-based HTTP agent vs human classifier",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules $(npm bin)/jest",
+    "serve": "node scripts/server.mjs",
+    "build": "vite build",
+    "eval": "node scripts/evaluate.mjs logs/dataset",
+    "gen": "node scripts/generateDataset.mjs logs/dataset 100",
+    "metrics": "node scripts/metricsInteractions.mjs",
+    "static": "http-server ./public -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "http-server": "^14.1.1",
+    "vite": "^5.2.0"
+  }
+}
