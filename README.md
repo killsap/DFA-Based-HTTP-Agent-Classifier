@@ -17,7 +17,6 @@ Video example can be seen here in my VM: https://youtu.be/2z7hHM0byMI
 6. [Synthetic Dataset](#synthetic-dataset)
 7. [How It Works](#how-it-works)
 8. [Limitations & Future Work](#limitations--future-work)
-9. [License](#license)
 
 ---
 ## Features
